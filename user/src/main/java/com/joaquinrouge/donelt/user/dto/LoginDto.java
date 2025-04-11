@@ -1,18 +1,17 @@
-package com.joaquinrouge.ecommerce.user.dto;
+package com.joaquinrouge.donelt.user.dto;
 
-public class CreateUserDto {
+public class LoginDto {
+	
 	private String email;
-	private String username;
 	private String password;
 	
-	public CreateUserDto() {
+	public LoginDto() {
 		
 	}
 
-	public CreateUserDto(String email, String username, String password) {
+	public LoginDto(String email, String password) {
 		super();
 		this.email = email;
-		this.username = username;
 		this.password = password;
 	}
 
@@ -22,14 +21,6 @@ public class CreateUserDto {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getPassword() {

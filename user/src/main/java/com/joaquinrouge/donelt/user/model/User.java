@@ -1,4 +1,4 @@
-package com.joaquinrouge.ecommerce.user.model;
+package com.joaquinrouge.donelt.user.model;
 
 import io.github.resilience4j.core.lang.Nullable;
 import jakarta.persistence.Column;

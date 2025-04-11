@@ -1,4 +1,4 @@
-package com.joaquinrouge.ecommerce.user.configuration;
+package com.joaquinrouge.donelt.user.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

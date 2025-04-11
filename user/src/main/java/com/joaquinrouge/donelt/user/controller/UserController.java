@@ -1,4 +1,4 @@
-package com.joaquinrouge.ecommerce.user.controller;
+package com.joaquinrouge.donelt.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.joaquinrouge.ecommerce.user.dto.CreateUserDto;
-import com.joaquinrouge.ecommerce.user.dto.LoginDto;
-import com.joaquinrouge.ecommerce.user.dto.UserDto;
-import com.joaquinrouge.ecommerce.user.model.User;
-import com.joaquinrouge.ecommerce.user.service.IUserService;
+import com.joaquinrouge.donelt.user.dto.CreateUserDto;
+import com.joaquinrouge.donelt.user.dto.LoginDto;
+import com.joaquinrouge.donelt.user.dto.UserDto;
+import com.joaquinrouge.donelt.user.model.User;
+import com.joaquinrouge.donelt.user.service.IUserService;
 
 @RestController
 @RequestMapping("/user")

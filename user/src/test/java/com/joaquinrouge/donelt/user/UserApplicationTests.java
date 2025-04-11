@@ -1,4 +1,4 @@
-package com.joaquinrouge.ecommerce.user;
+package com.joaquinrouge.donelt.user;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

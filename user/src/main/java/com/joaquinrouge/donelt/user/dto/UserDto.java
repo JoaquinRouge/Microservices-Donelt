@@ -1,4 +1,4 @@
-package com.joaquinrouge.ecommerce.user.dto;
+package com.joaquinrouge.donelt.user.dto;
 
 public class UserDto {
 	private String email;

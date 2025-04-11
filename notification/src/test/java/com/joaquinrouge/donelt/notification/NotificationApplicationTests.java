@@ -1,4 +1,4 @@
-package com.joaquinrouge.notification.Notification;
+package com.joaquinrouge.donelt.notification;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -8,11 +8,11 @@
 		<version>3.4.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.joaquinrouge.ecommerce</groupId>
+	<groupId>com.joaquinrouge.donelt</groupId>
 	<artifactId>user</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>user</name>
-	<description>E-Commerce application </description>
+	<description>User service for Donelt </description>
 	<url/>
 	<licenses>
 		<license/>

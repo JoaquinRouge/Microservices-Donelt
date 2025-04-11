@@ -1,13 +1,13 @@
-package com.joaquinrouge.ecommerce.user;
+package com.joaquinrouge.donelt.notification;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UserApplication {
+public class NotificationApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UserApplication.class, args);
+		SpringApplication.run(NotificationApplication.class, args);
 	}
 
 }

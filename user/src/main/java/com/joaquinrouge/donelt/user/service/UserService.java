@@ -1,4 +1,4 @@
-package com.joaquinrouge.ecommerce.user.service;
+package com.joaquinrouge.donelt.user.service;
 
 import java.util.List;
 
@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.joaquinrouge.ecommerce.user.model.User;
-import com.joaquinrouge.ecommerce.user.dto.CreateUserDto;
-import com.joaquinrouge.ecommerce.user.dto.UserDto;
-import com.joaquinrouge.ecommerce.user.repository.IUserRepository;
+import com.joaquinrouge.donelt.user.dto.CreateUserDto;
+import com.joaquinrouge.donelt.user.dto.UserDto;
+import com.joaquinrouge.donelt.user.model.User;
+import com.joaquinrouge.donelt.user.repository.IUserRepository;
 
 @Service
 public class UserService implements IUserService{
