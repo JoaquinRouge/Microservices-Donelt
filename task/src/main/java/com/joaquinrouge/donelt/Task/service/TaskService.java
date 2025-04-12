@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.joaquinrouge.donelt.Task.client.INotificationClient;
+import com.joaquinrouge.donelt.Task.dto.NotificationDto;
 import com.joaquinrouge.donelt.Task.model.Task;
 import com.joaquinrouge.donelt.Task.repository.ITaskRepository;
 
@@ -13,6 +15,9 @@ public class TaskService implements ITaskService{
 
 	@Autowired
 	private ITaskRepository taskRepo;
+	
+	@Autowired
+	private INotificationClient notiClient;
 	
 	@Override
 	public Task getTask(Long id) {
@@ -32,6 +37,8 @@ public class TaskService implements ITaskService{
 
 	@Override
 	public Task createTask(Task task) {
+		notiClient.createNotification(new NotificationDto(1L,"Task created"));
+		
 		return taskRepo.save(task);
 	}
 

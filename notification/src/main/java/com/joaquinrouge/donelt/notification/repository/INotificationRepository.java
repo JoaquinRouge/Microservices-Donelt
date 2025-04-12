@@ -10,6 +10,5 @@ import com.joaquinrouge.donelt.notification.model.Notification;
 
 @Repository
 public interface INotificationRepository extends JpaRepository<Notification, Long>{
-	Optional<List<Notification>> findByTaskId(Long id);
 	Optional<List<Notification>> findByUserId(Long id);
 }
