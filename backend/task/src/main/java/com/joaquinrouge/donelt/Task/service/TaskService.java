@@ -1,8 +1,11 @@
 package com.joaquinrouge.donelt.Task.service;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.joaquinrouge.donelt.Task.client.INotificationClient;
@@ -18,6 +21,11 @@ public class TaskService implements ITaskService{
 	
 	@Autowired
 	private INotificationClient notiClient;
+	
+	@Override
+	public List<Task> getAll(){
+		return taskRepo.findAll();
+	}
 	
 	@Override
 	public Task getTask(Long id) {
@@ -37,8 +45,6 @@ public class TaskService implements ITaskService{
 
 	@Override
 	public Task createTask(Task task) {
-		notiClient.createNotification(new NotificationDto(1L,"Task created"));
-		
 		return taskRepo.save(task);
 	}
 
@@ -60,5 +66,25 @@ public class TaskService implements ITaskService{
 		
 		return taskRepo.save(taskFromDb);
 	}
+
+	@Override
+	@Scheduled(cron = "0 13 17 * * ?")
+	public void generateNotifications() {
+	    LocalDate today = LocalDate.now();
+
+	    for (Task task : this.getAll()) {
+	        long daysRemaining = ChronoUnit.DAYS.between(today, task.getExpirationDate());
+
+	        if (daysRemaining >= 0 && daysRemaining <= 3) {
+	            notiClient.createNotification(
+	                new NotificationDto(
+	                    task.getUserId(),
+	                    task.getTitle() + " expires in " + daysRemaining + " days"
+	                )
+	            );
+	        }
+	    }
+	}
+
 
 }

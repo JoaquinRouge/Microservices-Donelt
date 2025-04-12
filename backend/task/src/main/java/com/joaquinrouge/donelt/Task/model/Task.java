@@ -1,6 +1,6 @@
 package com.joaquinrouge.donelt.Task.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,7 +25,10 @@ public class Task {
 	private boolean completed;
 	
 	@Column(nullable = false)
-	private LocalDateTime creationDate;
+	private LocalDate creationDate;
+	
+	@Column(nullable = false)
+	private LocalDate expirationDate;
 	
 	@Column(nullable = false)
 	private Long userId;
@@ -34,14 +37,15 @@ public class Task {
 		
 	}
 
-	public Task(Long id,String title, String description, boolean completed,
-			LocalDateTime creationDate, Long userId) {
+	public Task(Long id, String title, String description, boolean completed, LocalDate creationDate,
+			LocalDate expirationDate, Long userId) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.completed = completed;
 		this.creationDate = creationDate;
+		this.expirationDate = expirationDate;
 		this.userId = userId;
 	}
 
@@ -69,11 +73,11 @@ public class Task {
 		this.completed = completed;
 	}
 
-	public LocalDateTime getCreationDate() {
+	public LocalDate getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(LocalDateTime creationDate) {
+	public void setCreationDate(LocalDate creationDate) {
 		this.creationDate = creationDate;
 	}
 
@@ -91,6 +95,14 @@ public class Task {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public LocalDate getExpirationDate() {
+		return expirationDate;
+	}
+
+	public void setExpirationDate(LocalDate expirationDate) {
+		this.expirationDate = expirationDate;
 	}
 	
 }
