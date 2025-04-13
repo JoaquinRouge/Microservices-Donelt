@@ -97,7 +97,7 @@ public class UserService implements IUserService{
 			
 		}
 		
-		return new UserDto(userFromDB.getEmail(),userFromDB.getUsername());
+		return new UserDto(userFromDB.getId(),userFromDB.getEmail(),userFromDB.getUsername());
 	}
 
 }

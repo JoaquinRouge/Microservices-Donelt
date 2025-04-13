@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Donelt</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1>Donelt</h1>
+      <nav>
+        <i class="fa-solid fa-plus"></i>
+        <div>
+          <p class="noti-counter" id="notifications-count">0</p>
+          <div class="notification-wrapper">
+            <i id="bell-icon" class="fas fa-bell"></i>
+            <div id="notification-menu" class="notification-menu hidden">
+              <ul id="notification-list">
+                <!-- notifications from db -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section class="tasks" id="tasks">
+        <!-- tasks from db -->
+      </section>
+    </main>
+  </body>
+  <script src="./assets/js/donelt.js"></script>
+</html>
