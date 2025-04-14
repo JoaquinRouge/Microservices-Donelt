@@ -1,11 +1,15 @@
 const userId = JSON.parse(sessionStorage.getItem("user")).id;
 const taskSection = document.getElementById("tasks")
 
+document.getElementById("bell-icon").addEventListener("click", () => {
+  document.getElementById("notification-menu").classList.toggle("hidden");
+});
+
 function getNotifications() {
     fetch(`http://localhost:444/notification-service/api/notification/user/id/${userId}`)
       .then(response => {
         if (!response.ok) {
-          throw new Error("Error al obtener las notificaciones");
+          throw new Error("Error obtaining the notifications");
         }
         return response.json();
       })
@@ -18,14 +22,31 @@ function getNotifications() {
 
         notifications.forEach(notification => {
 
-            // Agrego una notificación a la lista flotante
-            const li = document.createElement("li");
-            li.textContent = notification.message;
-            list.appendChild(li);
+            // Agrego una notificacion a la lista flotante
+          let li =
+            `
+              <div class="notification">
+                <li>${notification.message}</li>
+                <i class="fa-solid fa-trash notiDeleteBtn" id="${notification.id}"></i>
+              </div>
+            `  
+          ;
+            list.innerHTML += li;
 
             // Incremento el contador visual
             count.innerHTML++;
         });
+
+        const notis = document.getElementsByClassName("notiDeleteBtn");
+
+        for (let i = 0; i < notis.length; i++) {
+          notis[i].addEventListener("click", function () {
+            if (confirm("This action will delete the notification, ¿continue?")) {
+              deleteNotification(this.id)
+            }
+          });
+        }
+
       })
       .catch(error => {
         console.error("Error:", error.message);
@@ -37,12 +58,15 @@ function getTasks() {
     fetch(`http://localhost:444/task-service/api/task/user/id/${userId}`)
     .then(response => {
       if (!response.ok) {
-        throw new Error("Error al obtener las tareas");
+        throw new Error("Error obtaining the tasks");
       }
       return response.json();
     })
     .then(tasks => {
+      taskSection.innerHTML = ""
       tasks.forEach(task => {
+
+
           taskSection.innerHTML += 
               
               `
@@ -54,20 +78,60 @@ function getTasks() {
                     </p>
                     <p class="expiration">Expires ${task.expirationDate}</p>
                 </div>
-                <button class="btn">Complete</button>
+                <button class="btn deleteBtn" id="${task.id}">Complete</button>
                 </div>
               `
       });
-  
+      const buttons = document.getElementsByClassName("deleteBtn");
+
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener("click", function () {
+          if (confirm("This action will delete the task, ¿continue?")) {
+            deleteTask(this.id)
+          }
+        });
+      }
     })
     .catch(error => {
       console.error("Error:", error.message);
     });
 }
 
-document.getElementById("bell-icon").addEventListener("click", () => {
-    document.getElementById("notification-menu").classList.toggle("hidden");
-  });
-  
+function deleteTask(id) {
+  fetch(`http://localhost:444/task-service/api/task/delete/${id}`, {
+    method: "DELETE",
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Error al eliminar la tarea");
+      }
+      console.log(`Tarea con ID ${id} eliminada correctamente`);
+
+      // Opcional: volver a cargar las tareas si querés refrescar la lista
+      getTasks();
+    })
+    .catch(error => {
+      console.error("Error:", error.message);
+    });
+}
+
+function deleteNotification(id) {
+  fetch(`http://localhost:444/notification-service/api/notification/delete/${id}`, {
+    method: "DELETE",
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Error al eliminar la tarea");
+      }
+      console.log(`Tarea con ID ${id} eliminada correctamente`);
+
+      // Opcional: volver a cargar las tareas si querés refrescar la lista
+      getNotifications();
+    })
+    .catch(error => {
+      console.error("Error:", error.message);
+    });
+}
+
 getNotifications()
 getTasks()

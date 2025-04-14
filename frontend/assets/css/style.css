@@ -6,6 +6,11 @@
     margin:0px;
 }
 
+a{
+    text-decoration: none;
+    color: black;
+}
+
 .D{
     color: black;
 }
@@ -61,7 +66,7 @@ nav{
 .task{
     display: flex;
     gap: 20px;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 600px;
     padding: 20px;
@@ -138,3 +143,17 @@ nav{
     border-bottom: none;
   }
   
+  .description{
+    width: 400px;
+  }
+
+  .notification{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 20px;
+  }
+
+  .notification i{
+    font-size: 20px;
+  }
