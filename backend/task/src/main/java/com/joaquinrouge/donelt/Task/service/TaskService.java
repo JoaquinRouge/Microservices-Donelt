@@ -53,6 +53,9 @@ public class TaskService implements ITaskService{
 		if(!taskRepo.existsById(id)) {
 			throw new IllegalArgumentException("Task with id " + id + " not found");
 		}
+		
+		taskRepo.deleteById(id);
+		
 	}
 
 	@Override
@@ -68,7 +71,7 @@ public class TaskService implements ITaskService{
 	}
 
 	@Override
-	@Scheduled(cron = "0 0 9 * * ?")
+	@Scheduled(cron = "0 18 20 * * ?")
 	public void generateNotifications() {
 	    LocalDate today = LocalDate.now();
 
@@ -84,6 +87,15 @@ public class TaskService implements ITaskService{
 	            );
 	        }
 	    }
+	}
+
+	@Override
+	public void completeTask(Long id) {
+		Task task = this.getTask(id);
+		
+		task.setCompleted(true);
+		
+		taskRepo.save(task);
 	}
 
 

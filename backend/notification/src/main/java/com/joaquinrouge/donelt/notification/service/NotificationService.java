@@ -31,6 +31,9 @@ public class NotificationService implements INotificationService {
 		if(!notiRepo.existsById(id)) {
 			throw new IllegalArgumentException("Notification not found");
 		}
+		
+		notiRepo.deleteById(id);
+		
 	}
 
 }

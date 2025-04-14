@@ -13,4 +13,5 @@ public interface ITaskService {
 	void deleteTask(Long id);
 	Task updateTask(Task task);
 	void generateNotifications();
+	void completeTask(Long id);
 }
