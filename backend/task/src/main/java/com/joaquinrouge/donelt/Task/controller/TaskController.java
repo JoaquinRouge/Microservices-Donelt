@@ -53,7 +53,7 @@ public class TaskController {
 				.body(taskService.createTask(taskService.updateTask(task)));
 	}
 	
-	@PostMapping("/complete/{id}")
+	@PutMapping("/complete/{id}")
 	public ResponseEntity<Object> completeTask(@PathVariable Long id){
 		taskService.completeTask(id);
 		return ResponseEntity.status(HttpStatus.OK).build();

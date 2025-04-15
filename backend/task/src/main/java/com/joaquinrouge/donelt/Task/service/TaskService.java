@@ -71,7 +71,7 @@ public class TaskService implements ITaskService{
 	}
 
 	@Override
-	@Scheduled(cron = "0 18 20 * * ?")
+	@Scheduled(cron = "0 0 9 * * ?")
 	public void generateNotifications() {
 	    LocalDate today = LocalDate.now();
 
