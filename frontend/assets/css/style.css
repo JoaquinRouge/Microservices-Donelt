@@ -74,8 +74,12 @@ nav{
     border-radius: 10px;
 }
 
+.task button i{
+    font-size: 25px;
+}
+
 .btn {
-    width: 100px;
+    width: 70px;
     height: 50px;
     background-color: #5F8B4C;
     color: white;
@@ -156,4 +160,13 @@ nav{
 
   .notification i{
     font-size: 20px;
+  }
+
+  hr{
+    height: 1px;
+    background-color: rgb(214, 209, 209);
+    margin-right: 300px;
+    margin-left: 300px;
+    margin-top: 100px;
+    border: none;
   }

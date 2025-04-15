@@ -1,5 +1,6 @@
 const userId = JSON.parse(sessionStorage.getItem("user")).id;
 const taskSection = document.getElementById("tasks")
+const completedTasksSection = document.getElementById("completed-tasks")
 
 document.getElementById("bell-icon").addEventListener("click", () => {
   document.getElementById("notification-menu").classList.toggle("hidden");
@@ -64,9 +65,10 @@ function getTasks() {
     })
     .then(tasks => {
       taskSection.innerHTML = ""
+      completedTasksSection.innerHTML = ""
       tasks.forEach(task => {
 
-
+        if (task.completed == false) {
           taskSection.innerHTML += 
               
               `
@@ -78,14 +80,43 @@ function getTasks() {
                     </p>
                     <p class="expiration">Expires ${task.expirationDate}</p>
                 </div>
-                <button class="btn deleteBtn" id="${task.id}">Complete</button>
+                <button class="btn taskBtn" id="${task.id}"><i class="fa-solid fa-check"></i></button>
+                <button class="btn deleteBtn" id="${task.id}"><i class="fa-solid fa-trash"></i></button>
+                <button class="btn editBtn" id="${task.id}"><i class="fa-solid fa-pencil"></i></button>
                 </div>
               `
+          
+        } else {
+          completedTasksSection.innerHTML += 
+            
+          `
+          <div class="task">
+          <div class="task-info">
+              <p class="title"><s>${task.title}</s></p>
+              <p class="description">
+                  ${task.description}
+              </p>
+              <p class="expiration">Expires ${task.expirationDate}</p>
+          </div>
+          <button class="btn deleteBtn" id="${task.id}"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        `
+          
+        }
       });
-      const buttons = document.getElementsByClassName("deleteBtn");
+      const buttons = document.getElementsByClassName("taskBtn");
+      const deleteButtons = document.getElementsByClassName("deleteBtn")
 
       for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener("click", function () {
+          if (confirm("This action will mark the task as completed, ¿continue?")) {
+            completeTask(this.id)
+          }
+        });
+      }
+
+      for (let i = 0; i < deleteButtons.length; i++) {
+        deleteButtons[i].addEventListener("click", function () {
           if (confirm("This action will delete the task, ¿continue?")) {
             deleteTask(this.id)
           }
@@ -127,6 +158,24 @@ function deleteNotification(id) {
 
       // Opcional: volver a cargar las tareas si querés refrescar la lista
       getNotifications();
+    })
+    .catch(error => {
+      console.error("Error:", error.message);
+    });
+}
+
+function completeTask(id) {
+  fetch(`http://localhost:444/task-service/api/task/complete/${id}`, {
+    method: "PUT",
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Error during fetch");
+      }
+      console.log(`Task with id ${id} marked as completed`);
+
+      // Opcional: volver a cargar las tareas si querés refrescar la lista
+      getTasks();
     })
     .catch(error => {
       console.error("Error:", error.message);
