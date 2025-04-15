@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/login.css" />
+    <title>Donelt | Create Task</title>
+  </head>
+  <body>
+    <div class="login-container">
+      <h2>Update Task</h2>
+      <form id="loginForm">
+        <div class="input-group">
+          <input type="text" id="text" placeholder="Title" required />
+        </div>
+        <div class="input-group">
+          <input
+            type="text"
+            id="description"
+            placeholder="Description"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <input type="date" id="expirationDate" required />
+        </div>
+        <button type="submit" class="btn">Update task</button>
+      </form>
+      <p class="register"><a href="./donelt.html">Back to Donelt</a></p>
+    </div>
+  </body>
+  <script src="./assets/js/updateTask.js"></script>
+</html>

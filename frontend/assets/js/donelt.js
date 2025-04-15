@@ -1,6 +1,10 @@
 const userId = JSON.parse(sessionStorage.getItem("user")).id;
+const username = JSON.parse(sessionStorage.getItem("user")).username;
 const taskSection = document.getElementById("tasks")
 const completedTasksSection = document.getElementById("completed-tasks")
+const title = document.getElementById("title")
+
+title.innerHTML += " " + username
 
 document.getElementById("bell-icon").addEventListener("click", () => {
   document.getElementById("notification-menu").classList.toggle("hidden");
@@ -23,7 +27,7 @@ function getNotifications() {
 
         notifications.forEach(notification => {
 
-            // Agrego una notificacion a la lista flotante
+          // Agrego una notificacion a la lista flotante
           let li =
             `
               <div class="notification">
@@ -82,7 +86,15 @@ function getTasks() {
                 </div>
                 <button class="btn taskBtn" id="${task.id}"><i class="fa-solid fa-check"></i></button>
                 <button class="btn deleteBtn" id="${task.id}"><i class="fa-solid fa-trash"></i></button>
-                <button class="btn editBtn" id="${task.id}"><i class="fa-solid fa-pencil"></i></button>
+                <button 
+                  class="btn editBtn" 
+                  id="${task.id}" 
+                  data-title="${encodeURIComponent(task.title)}" 
+                  data-description="${encodeURIComponent(task.description)}" 
+                  data-expiration="${task.expirationDate}">
+                  <i class="fa-solid fa-pencil"></i>
+                </button>
+
                 </div>
               `
           
@@ -106,6 +118,7 @@ function getTasks() {
       });
       const buttons = document.getElementsByClassName("taskBtn");
       const deleteButtons = document.getElementsByClassName("deleteBtn")
+      const editButtons = document.getElementsByClassName("editBtn")
 
       for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener("click", function () {
@@ -122,6 +135,18 @@ function getTasks() {
           }
         });
       }
+
+      for (let i = 0; i < editButtons.length; i++) {
+        editButtons[i].addEventListener("click", function () {
+          const title = this.dataset.title;
+          const description = this.dataset.description;
+          const expirationDate = this.dataset.expiration;
+      
+          window.location.href =
+            `editTask.html?title=${title}&description=${description}&expirationDate=${expirationDate}&id=${this.id}`;
+        });
+      }
+      
     })
     .catch(error => {
       console.error("Error:", error.message);

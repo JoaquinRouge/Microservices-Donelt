@@ -71,3 +71,11 @@ input::placeholder{
 .link:hover {
     text-decoration: underline;
 }
+
+i{
+    font-size: 27px;
+    position: absolute;
+    right: 630px;
+    top: 392px;
+    cursor: pointer;
+}

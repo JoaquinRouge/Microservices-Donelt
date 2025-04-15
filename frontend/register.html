@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/register.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Donelt | Sign up</title>
   </head>
   <body>
@@ -13,10 +20,14 @@
         <input type="email" placeholder="Email" id="email" required />
         <input type="text" placeholder="Username" id="username" required />
         <input type="password" placeholder="Password" id="password" required />
-        <button type="submit" class="btn">Create account</button>
+        <div>
+          <div id="passwordDiv"></div>
+          <button type="submit" class="btn">Create account</button>
+        </div>
       </form>
       <a href="./index.html" class="link">Back to Log in</a>
     </div>
+    <script src="./assets/js/hidePassword.js"></script>
     <script src="./assets/js/register.js"></script>
   </body>
 </html>

@@ -81,3 +81,10 @@ body {
 .register a:hover {
     text-decoration: underline;
 }
+
+i{
+    font-size: 27px;
+    position: absolute;
+    right: 10px;
+    top: 8px;
+}
