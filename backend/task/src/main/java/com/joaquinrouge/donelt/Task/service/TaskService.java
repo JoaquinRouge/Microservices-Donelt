@@ -63,7 +63,7 @@ public class TaskService implements ITaskService{
 		
 		Task taskFromDb = this.getTask(task.getId());
 		
-		taskFromDb.setCompleted(false);
+		taskFromDb.setExpirationDate(task.getExpirationDate());
 		taskFromDb.setDescription(task.getDescription());
 		taskFromDb.setTitle(task.getTitle());
 		
