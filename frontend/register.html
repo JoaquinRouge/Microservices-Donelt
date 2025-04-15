@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./assets/css/register.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/login.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -11,23 +12,32 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <title>Donelt | Sign up</title>
+    <title>Donelt | Login</title>
   </head>
   <body>
-    <div class="form-container">
-      <h2>Sign up</h2>
+    <div class="login-container">
+      <h2>Register</h2>
       <form id="registerForm">
-        <input type="email" placeholder="Email" id="email" required />
-        <input type="text" placeholder="Username" id="username" required />
-        <input type="password" placeholder="Password" id="password" required />
-        <div>
-          <div id="passwordDiv"></div>
-          <button type="submit" class="btn">Create account</button>
+        <div class="input-group">
+          <input type="email" id="email" placeholder="Email" required />
         </div>
+        <div class="input-group">
+          <input type="text" id="username" placeholder="Username" required />
+        </div>
+        <div class="input-group">
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          <div id="passwordDiv"></div>
+        </div>
+        <button type="submit" class="btn">Create account</button>
       </form>
-      <a href="./index.html" class="link">Back to Log in</a>
+      <p class="register"><a href="./index.html">Log in</a></p>
     </div>
-    <script src="./assets/js/hidePassword.js"></script>
     <script src="./assets/js/register.js"></script>
+    <script src="./assets/js/hidePassword.js"></script>
   </body>
 </html>

@@ -33,7 +33,7 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
         throw new Error("Error updating the task");
       }
       alert("Task updated successfully!");
-      window.location.href = "donelt.html"; // Redirigís a tu pantalla principal
+      window.location.href = "donelt.html"; 
     })
     .catch(error => {
       console.error("Update error:", error.message);

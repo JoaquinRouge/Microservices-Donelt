@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 * {
     margin: 0;
@@ -13,24 +12,46 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: radial-gradient(circle at center, #000, #111);
+    overflow: hidden;
+    position: relative;
 }
 
+/* Glow verde en el fondo */
+body::before {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #78a765, transparent 70%);
+    filter: blur(100px);
+    opacity: 0.3;
+    z-index: 0;
+}
+
+/* Contenedor del login con efecto glow */
 .login-container {
-    background: white;
+    background: #1b1b1b;
     padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    box-shadow:
+        0 0 30px rgba(120, 167, 101, 0.2),
+        0 0 60px rgba(95, 139, 76, 0.25);
     text-align: center;
-    color: black;
+    color: white;
     width: 350px;
+    position: relative;
+    z-index: 1;
 }
 
 .login-container h2 {
     margin-bottom: 1rem;
     font-size: 1.8rem;
     letter-spacing: 1px;
+    color: #78a765;
 }
 
+/* Estilo de inputs */
 .input-group {
     margin: 1rem 0;
     position: relative;
@@ -40,41 +61,51 @@ body {
     width: 100%;
     padding: 12px 15px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 1rem;
-    background: rgb(242, 240, 240);
-    color: black;
+    background: #2b2b2b;
+    color: white;
     outline: none;
+    border: 1px solid #5F8B4C;
+    transition: 0.3s ease;
+}
+
+.input-group input:focus {
+    box-shadow: 0 0 10px #78a765;
 }
 
 .input-group input::placeholder {
-    color: black;
+    color: #ccc;
 }
 
+/* Botón login */
 .btn {
     width: 100%;
     padding: 12px;
-    background: #5F8B4C;
+    background: #78a765;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 1rem;
     color: white;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background 0.3s, box-shadow 0.3s;
+    color: #0d0d0d;
 }
 
 .btn:hover {
-    background: #78a765;
+    background: #5F8B4C;
+    box-shadow: 0 0 12px #78a765;
 }
 
+/* Link de registro */
 .register {
     margin-top: 10px;
     font-size: 0.9rem;
 }
 
 .register a {
-    color: #5F8B4C;
+    color: #78a765;
     text-decoration: none;
 }
 
@@ -82,9 +113,11 @@ body {
     text-decoration: underline;
 }
 
-i{
+/* Ícono de mostrar/ocultar contraseña */
+i {
     font-size: 27px;
     position: absolute;
     right: 10px;
     top: 8px;
+    color: #78a765;
 }
