@@ -77,7 +77,7 @@ public class TaskService implements ITaskService{
 
 	@Override
 	@Scheduled(cron = "0 0 9 * * ?")
-	@CircuitBreaker(name = "task-service", fallbackMethod = "notiClientFallbackMethod")
+	@CircuitBreaker(name = "task-service", fallbackMethod = "generateNotificationFallbackMethod")
 	public void generateNotifications() {
 	    LocalDate today = LocalDate.now();
 
@@ -104,7 +104,7 @@ public class TaskService implements ITaskService{
 		taskRepo.save(task);
 	}
 
-	public void notiClientFallbackMethod(Throwable t) {
+	public void generateNotificationFallbackMethod(Throwable t) {
 		System.out.println("Notification fallback triggered: " + t.getMessage());
 	}
 
