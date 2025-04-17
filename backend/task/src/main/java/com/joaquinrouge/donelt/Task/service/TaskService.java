@@ -83,7 +83,7 @@ public class TaskService implements ITaskService{
 	    LocalDate today = LocalDate.now();
 
 	    for (Task task : this.getAll()) {
-	    	long daysRemaining = ChronoUnit.DAYS.between(today, task.getExpirationDate());
+	    	Long daysRemaining = ChronoUnit.DAYS.between(today, task.getExpirationDate());
 	    	if(task.getLastNotified() == null || !task.getLastNotified().equals(today)) {
 	    		if (daysRemaining >= 0 && daysRemaining <= 3) {
 	    			task.setLastNotified(today);

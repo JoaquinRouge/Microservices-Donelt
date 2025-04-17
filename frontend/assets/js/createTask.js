@@ -13,6 +13,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
       description: document.getElementById("description").value,
       expirationDate: document.getElementById("expirationDate").value,
       creationDate: new Date().toISOString().split("T")[0],
+      lastNotified:null,
       completed: false,
       userId: user.id
     };
