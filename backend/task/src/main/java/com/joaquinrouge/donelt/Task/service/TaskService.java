@@ -12,6 +12,8 @@ import com.joaquinrouge.donelt.Task.dto.NotificationDto;
 import com.joaquinrouge.donelt.Task.model.Task;
 import com.joaquinrouge.donelt.Task.repository.ITaskRepository;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
 @Service
 public class TaskService implements ITaskService{
 
@@ -75,6 +77,7 @@ public class TaskService implements ITaskService{
 
 	@Override
 	@Scheduled(cron = "0 0 9 * * ?")
+	@CircuitBreaker(name = "task-service", fallbackMethod = "notiClientFallbackMethod")
 	public void generateNotifications() {
 	    LocalDate today = LocalDate.now();
 
@@ -101,5 +104,8 @@ public class TaskService implements ITaskService{
 		taskRepo.save(task);
 	}
 
+	public void notiClientFallbackMethod(Throwable t) {
+		System.out.println("Notification fallback triggered: " + t.getMessage());
+	}
 
 }
