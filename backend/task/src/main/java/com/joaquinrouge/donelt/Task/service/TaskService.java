@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +15,15 @@ import com.joaquinrouge.donelt.Task.repository.ITaskRepository;
 @Service
 public class TaskService implements ITaskService{
 
-	@Autowired
-	private ITaskRepository taskRepo;
+	private final ITaskRepository taskRepo;
 	
-	@Autowired
-	private INotificationClient notiClient;
+	private final INotificationClient notiClient;
+	
+	public TaskService(ITaskRepository taskRepo,INotificationClient notiClient) {
+		this.taskRepo = taskRepo;
+		this.notiClient = notiClient;
+	}
+	
 	
 	@Override
 	public List<Task> getAll(){

@@ -1,6 +1,5 @@
 package com.joaquinrouge.donelt.notification.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,8 +17,11 @@ import com.joaquinrouge.donelt.notification.service.INotificationService;
 @RequestMapping("/api/notification")
 public class NotificationController {
 
-	@Autowired
-	private INotificationService notiService;
+	private final INotificationService notiService;
+	
+	public NotificationController(INotificationService notiService) {
+		this.notiService = notiService;
+	}
 	
 	@GetMapping("/user/id/{id}")
 	public ResponseEntity<Object> getByUserId(@PathVariable("id") Long id){

@@ -2,7 +2,6 @@ package com.joaquinrouge.donelt.user.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +13,13 @@ import com.joaquinrouge.donelt.user.repository.IUserRepository;
 @Service
 public class UserService implements IUserService{
 
-	@Autowired
-	private IUserRepository userRepo;
+	private final IUserRepository userRepo;
+	private final PasswordEncoder passwordEncoder;
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	public UserService(IUserRepository userRepo, PasswordEncoder passwordEncoder) {
+		this.userRepo = userRepo;
+		this.passwordEncoder = passwordEncoder;
+	}
 	
 	@Override
 	public List<User> getAllUsers() {

@@ -1,6 +1,5 @@
 package com.joaquinrouge.donelt.Task.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,8 +18,11 @@ import com.joaquinrouge.donelt.Task.service.ITaskService;
 @RequestMapping("/api/task")
 public class TaskController {
 
-	@Autowired
-	private ITaskService taskService;
+	private final ITaskService taskService;
+	
+	public TaskController(ITaskService taskService) {
+		this.taskService = taskService;
+	}
 	
 	@GetMapping("/user/id/{userId}")
 	public ResponseEntity<Object> tasksForUser(@PathVariable("userId") Long userId){
