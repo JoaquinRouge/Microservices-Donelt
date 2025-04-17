@@ -71,27 +71,32 @@ public class TaskService implements ITaskService{
 		taskFromDb.setExpirationDate(task.getExpirationDate());
 		taskFromDb.setDescription(task.getDescription());
 		taskFromDb.setTitle(task.getTitle());
+		taskFromDb.setLastNotified(task.getLastNotified());
 		
 		return taskRepo.save(taskFromDb);
 	}
 
 	@Override
-	@Scheduled(cron = "0 0 9 * * ?")
+	@Scheduled(cron = "0 0 9,10,11 * * ?")
 	@CircuitBreaker(name = "task-service", fallbackMethod = "generateNotificationFallbackMethod")
 	public void generateNotifications() {
 	    LocalDate today = LocalDate.now();
 
 	    for (Task task : this.getAll()) {
-	        long daysRemaining = ChronoUnit.DAYS.between(today, task.getExpirationDate());
-
-	        if (daysRemaining >= 0 && daysRemaining <= 3) {
-	            notiClient.createNotification(
-	                new NotificationDto(
-	                    task.getUserId(),
-	                    task.getTitle() + " expires in " + daysRemaining + " days"
-	                )
-	            );
-	        }
+	    	long daysRemaining = ChronoUnit.DAYS.between(today, task.getExpirationDate());
+	    	if(task.getLastNotified() == null || !task.getLastNotified().equals(today)) {
+	    		if (daysRemaining >= 0 && daysRemaining <= 3) {
+	    			task.setLastNotified(today);
+	    			this.updateTask(task);
+	    			notiClient.createNotification(
+	    					new NotificationDto(
+	    							task.getUserId(),
+	    							task.getTitle() + " expires in " + daysRemaining + " days"
+	    							)
+	    					);
+	    		}	    		
+	    	}
+	        
 	    }
 	}
 

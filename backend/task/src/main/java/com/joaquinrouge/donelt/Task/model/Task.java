@@ -30,6 +30,9 @@ public class Task {
 	@Column(nullable = false)
 	private LocalDate expirationDate;
 	
+	@Column(nullable = true)
+	private LocalDate lastNotified;	
+	
 	@Column(nullable = false)
 	private Long userId;
 	
@@ -38,7 +41,7 @@ public class Task {
 	}
 
 	public Task(Long id, String title, String description, boolean completed, LocalDate creationDate,
-			LocalDate expirationDate, Long userId) {
+			LocalDate expirationDate,LocalDate lastNotified, Long userId) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -46,7 +49,16 @@ public class Task {
 		this.completed = completed;
 		this.creationDate = creationDate;
 		this.expirationDate = expirationDate;
+		this.lastNotified = lastNotified;
 		this.userId = userId;
+	}
+	
+	public LocalDate getLastNotified() {
+		return lastNotified;
+	}
+
+	public void setLastNotified(LocalDate lastNotified) {
+		this.lastNotified = lastNotified;
 	}
 
 	public Long getId() {
