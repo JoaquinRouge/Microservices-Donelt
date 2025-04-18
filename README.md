@@ -1,4 +1,6 @@
 # 📋 Donelt – Sistema de Gestión de Tareas
+![Java](https://img.shields.io/badge/Java-21-blue?logo=java)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.0-brightgreen?logo=springboot)
 
 **Donelt** es una aplicación web desarrollada con arquitectura de microservicios que permite a los usuarios gestionar sus tareas de manera eficiente. Con esta plataforma podrás crear, editar, eliminar y completar tareas, además de recibir notificaciones automáticas cuando se aproximen las fechas de vencimiento.
 
@@ -12,7 +14,7 @@
 ## ⚙️ Tecnologías Utilizadas
 
 ### 🧠 Backend
-- Java 17
+- Java 21
 - Spring Boot
 - Spring Cloud (Eureka, Feign Client)
 - Spring Data JPA + Hibernate
