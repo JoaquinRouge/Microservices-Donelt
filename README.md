@@ -3,6 +3,11 @@
 **Donelt** es una aplicación web desarrollada con arquitectura de microservicios que permite a los usuarios gestionar sus tareas de manera eficiente. Con esta plataforma podrás crear, editar, eliminar y completar tareas, además de recibir notificaciones automáticas cuando se aproximen las fechas de vencimiento.
 
 ---
+## 🖼️ Imagenes del proyecto
+
+<img src="images/login.jpg" width="700"/>
+<img src="images/donelt.jpg" width="700"/>
+<img src="images/updateTask.jpg" width="700"/>
 
 ## ⚙️ Tecnologías Utilizadas
 
