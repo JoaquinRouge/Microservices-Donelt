@@ -17,6 +17,8 @@
 - Java 21
 - Spring Boot
 - Spring Cloud (Eureka, Feign Client)
+- Resilience4J (Loadbalancing)
+- Feign Client (Comunicación entre microservicios)
 - Spring Data JPA + Hibernate
 - MySQL
 - Resilience4j (Circuit Breaker)
