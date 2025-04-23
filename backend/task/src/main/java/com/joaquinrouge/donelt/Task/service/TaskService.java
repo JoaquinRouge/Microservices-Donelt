@@ -77,7 +77,7 @@ public class TaskService implements ITaskService{
 	}
 
 	@Override
-	@Scheduled(cron = "0 0 9,10,11 * * ?")
+	@Scheduled(cron = "0 08 12 * * ?")
 	@CircuitBreaker(name = "task-service", fallbackMethod = "generateNotificationFallbackMethod")
 	public void generateNotifications() {
 	    LocalDate today = LocalDate.now();
