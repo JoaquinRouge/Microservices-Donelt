@@ -1,0 +1,41 @@
+services:
+  eureka-server:
+    build: eureka-server
+    mem_limit: 999m
+    ports:
+      - "8761:8761"
+    networks:
+      - "donelt-network"
+  api-gateway:
+    build: api-gateway
+    mem_limit: 999m
+    ports:
+      - "444:444"
+    networks:
+      - "donelt-network"
+    depends_on:
+      - eureka-server
+  notifcation-server:
+    build: notification-service
+    mem_limit: 999m
+    ports:
+      - "9001:9001"
+    networks:
+      - "donelt-network"
+  task-server:
+    build: task-service
+    mem_limit: 999m
+    ports:
+      - "9000:9000"
+    networks:
+      - "donelt-network"
+  user-server:
+    build: user-service
+    mem_limit: 999m
+    ports:
+      - "9002:9002"
+    networks:
+      - "donelt-network"
+
+networks:
+  donelt-network:
