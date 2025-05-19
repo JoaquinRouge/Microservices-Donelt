@@ -6,7 +6,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.joaquinrouge.donelt.user.dto.CreateUserDto;
-import com.joaquinrouge.donelt.user.dto.UserDto;
 import com.joaquinrouge.donelt.user.model.UserModel;
 import com.joaquinrouge.donelt.user.repository.IUserRepository;
 

@@ -24,11 +24,6 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-	@Bean
-	PasswordEncoder passwordEnconder() {
-		return new BCryptPasswordEncoder();
-	}
-	
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http

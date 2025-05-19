@@ -2,6 +2,7 @@ package com.joaquinrouge.donelt.user.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/id/{id}")
+	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<Object> getUserById(@PathVariable Long id){
 		try {
 			UserModel user = userService.getUserById(id);
@@ -43,6 +45,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/create")
+	@PreAuthorize("permitAll()")
 	public ResponseEntity<Object> createUser(@RequestBody CreateUserDto user){
 		try {
 			UserModel createUser = userService.createUser(user);
