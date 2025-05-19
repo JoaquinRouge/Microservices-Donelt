@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.joaquinrouge.donelt.user.dto.CreateUserDto;
-import com.joaquinrouge.donelt.user.dto.LoginDto;
-import com.joaquinrouge.donelt.user.dto.UserDto;
 import com.joaquinrouge.donelt.user.model.UserModel;
 import com.joaquinrouge.donelt.user.service.IUserService;
 

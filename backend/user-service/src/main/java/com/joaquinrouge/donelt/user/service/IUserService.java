@@ -3,7 +3,6 @@ package com.joaquinrouge.donelt.user.service;
 import java.util.List;
 
 import com.joaquinrouge.donelt.user.dto.CreateUserDto;
-import com.joaquinrouge.donelt.user.dto.UserDto;
 import com.joaquinrouge.donelt.user.model.UserModel;
 
 public interface IUserService {
