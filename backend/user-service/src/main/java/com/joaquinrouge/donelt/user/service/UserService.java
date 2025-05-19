@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.joaquinrouge.donelt.user.dto.CreateUserDto;
 import com.joaquinrouge.donelt.user.dto.UserDto;
-import com.joaquinrouge.donelt.user.model.User;
+import com.joaquinrouge.donelt.user.model.UserModel;
 import com.joaquinrouge.donelt.user.repository.IUserRepository;
 
 @Service
@@ -22,25 +22,25 @@ public class UserService implements IUserService{
 	}
 	
 	@Override
-	public List<User> getAllUsers() {
+	public List<UserModel> getAllUsers() {
 		return userRepo.findAll();
 	}
 
 	@Override
-	public User getUserById(Long id) {
+	public UserModel getUserById(Long id) {
 		return userRepo.findById(id)
 				.orElseThrow(()-> new IllegalArgumentException("User not found"));
 	}
 
 	@Override
-	public User getUserByEmail(String email) {
+	public UserModel getUserByEmail(String email) {
 		return userRepo.findByEmail(email)
 				.orElseThrow(()-> new IllegalArgumentException(
 						"User with email: "+ email + " not found"));
 	}
 	
 	@Override
-	public User createUser(CreateUserDto user) {
+	public UserModel createUser(CreateUserDto user) {
 		
 		if(userRepo.existsByEmail(user.getEmail())) {
 			throw new IllegalArgumentException("Email is already in use");
@@ -51,7 +51,7 @@ public class UserService implements IUserService{
 		}
 		
 		String hashedPassword = passwordEncoder.encode(user.getPassword());
-		User newUser = new User(user.getEmail(),user.getUsername(),hashedPassword);
+		UserModel newUser = new UserModel(user.getEmail(),user.getUsername(),hashedPassword);
 
 		return userRepo.save(newUser);
 	}
@@ -68,9 +68,9 @@ public class UserService implements IUserService{
 	}
 
 	@Override
-	public User updateUser(User user) {
+	public UserModel updateUser(UserModel user) {
 		
-		User userFromDb = this.getUserById(user.getId());
+		UserModel userFromDb = this.getUserById(user.getId());
 		
 		if(userRepo.existsByEmail(user.getEmail())) {
 			throw new IllegalArgumentException("Email is already in use");
@@ -85,20 +85,6 @@ public class UserService implements IUserService{
 		userFromDb.setPassword(passwordEncoder.encode(user.getPassword()));
 		
 		return userRepo.save(userFromDb);
-	}
-
-	@Override
-	public UserDto login(String email, String password) {
-		
-		User userFromDB = this.getUserByEmail(email);
-		
-		if(!passwordEncoder.matches(password,userFromDB.getPassword())) {
-			
-			throw new RuntimeException("Invalid credentials");
-			
-		}
-		
-		return new UserDto(userFromDB.getId(),userFromDB.getEmail(),userFromDB.getUsername());
 	}
 
 }

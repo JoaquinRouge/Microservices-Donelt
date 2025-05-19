@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.joaquinrouge.donelt.user.dto.CreateUserDto;
 import com.joaquinrouge.donelt.user.dto.LoginDto;
 import com.joaquinrouge.donelt.user.dto.UserDto;
-import com.joaquinrouge.donelt.user.model.User;
+import com.joaquinrouge.donelt.user.model.UserModel;
 import com.joaquinrouge.donelt.user.service.IUserService;
 
 @RestController
@@ -35,7 +35,7 @@ public class UserController {
 	@GetMapping("/id/{id}")
 	public ResponseEntity<Object> getUserById(@PathVariable Long id){
 		try {
-			User user = userService.getUserById(id);
+			UserModel user = userService.getUserById(id);
 			return ResponseEntity.status(HttpStatus.OK).body(user);
 		}catch(IllegalArgumentException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -45,21 +45,9 @@ public class UserController {
 	@PostMapping("/create")
 	public ResponseEntity<Object> createUser(@RequestBody CreateUserDto user){
 		try {
-			User createUser = userService.createUser(user);
+			UserModel createUser = userService.createUser(user);
 			return ResponseEntity.status(HttpStatus.CREATED).body(createUser);
 		}catch(IllegalArgumentException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-		}
-	}
-	
-	@PostMapping("/login")
-	public ResponseEntity<Object> login(@RequestBody LoginDto loginDto){
-		try {
-			UserDto userDto = userService.login(loginDto.getEmail(),loginDto.getPassword());
-			return ResponseEntity.status(HttpStatus.OK).body(userDto);
-		}catch(IllegalArgumentException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-		}catch(RuntimeException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 	}
@@ -75,9 +63,9 @@ public class UserController {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<Object> updateUser(@RequestBody User user){
+	public ResponseEntity<Object> updateUser(@RequestBody UserModel user){
 		try {
-			User updateUser = userService.updateUser(user);
+			UserModel updateUser = userService.updateUser(user);
 			return ResponseEntity.status(HttpStatus.CREATED).body(updateUser);
 		}catch(IllegalArgumentException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
