@@ -2,6 +2,7 @@ package com.joaquinrouge.donelt.Task.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,21 +12,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.joaquinrouge.donelt.Task.model.Task;
 import com.joaquinrouge.donelt.Task.service.ITaskService;
+import com.joaquinrouge.donelt.Task.utils.JwtUtils;
+
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/task")
 public class TaskController {
 
 	private final ITaskService taskService;
+	private final JwtUtils jwtUtils;
 	
-	public TaskController(ITaskService taskService) {
+	public TaskController(ITaskService taskService,JwtUtils jwtUtils) {
 		this.taskService = taskService;
+		this.jwtUtils = jwtUtils;
 	}
 	
 	@GetMapping("/user/id/{userId}")
-	public ResponseEntity<Object> tasksForUser(@PathVariable("userId") Long userId){
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<Object> tasksForUser(@PathVariable("userId") Long userId,
+			HttpServletRequest request){
+		
+		 String token = request.getHeader("Authorization").substring(7);
+		 DecodedJWT jwt = jwtUtils.validateJwt(token);
+		 Long userIdFromToken = jwt.getClaim("id").asLong();
+		
+		 if(userIdFromToken != userId) {
+			  return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unauthorized");
+		 }
+		 
 		return ResponseEntity.status(HttpStatus.OK).body(taskService.getTasksForUser(userId));
 	}
 	
