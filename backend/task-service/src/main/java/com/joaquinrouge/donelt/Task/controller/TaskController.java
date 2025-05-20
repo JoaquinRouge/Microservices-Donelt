@@ -49,17 +49,52 @@ public class TaskController {
 	}
 	
 	@GetMapping("/user/id/{userId}/pending")
-	public ResponseEntity<Object> pendingTasks(@PathVariable("userId") Long userId){
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<Object> pendingTasks(@PathVariable("userId") Long userId,
+			HttpServletRequest request){
+		
+
+		 String token = request.getHeader("Authorization").substring(7);
+		 DecodedJWT jwt = jwtUtils.validateJwt(token);
+		 Long userIdFromToken = jwt.getClaim("id").asLong();
+		
+		 if(userIdFromToken != userId) {
+			  return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unauthorized");
+		 }
+		
 		return ResponseEntity.status(HttpStatus.OK).body(taskService.getUncompletedTasks(userId));
 	}
 	
 	@PostMapping("/create")
-	public ResponseEntity<Object> createTask(@RequestBody Task task){
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<Object> createTask(@RequestBody Task task,
+			HttpServletRequest request){
+		
+
+		 String token = request.getHeader("Authorization").substring(7);
+		 DecodedJWT jwt = jwtUtils.validateJwt(token);
+		 Long userIdFromToken = jwt.getClaim("id").asLong();
+		
+		 if(userIdFromToken != task.getUserId()) {
+			  return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unauthorized");
+		 }
+		
 		return ResponseEntity.status(HttpStatus.CREATED).body(taskService.createTask(task));
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<Object> deleteTask(@PathVariable("id") Long id){
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<Object> deleteTask(@PathVariable("id") Long id,
+			HttpServletRequest request){
+		
+		 String token = request.getHeader("Authorization").substring(7);
+		 DecodedJWT jwt = jwtUtils.validateJwt(token);
+		 Long userIdFromToken = jwt.getClaim("id").asLong();
+		
+		 if(userIdFromToken != taskService.getTask(id).getUserId()) {
+			  return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unauthorized");
+		 }
+		
 		try {
 			taskService.deleteTask(id);
 			return ResponseEntity.status(HttpStatus.OK).build();
@@ -69,13 +104,35 @@ public class TaskController {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<Object> updateTask(@RequestBody Task task){
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<Object> updateTask(@RequestBody Task task,
+			HttpServletRequest request){
+		
+		 String token = request.getHeader("Authorization").substring(7);
+		 DecodedJWT jwt = jwtUtils.validateJwt(token);
+		 Long userIdFromToken = jwt.getClaim("id").asLong();
+		
+		 if(userIdFromToken != task.getUserId()) {
+			  return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unauthorized");
+		 }
+		
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(taskService.createTask(taskService.updateTask(task)));
 	}
 	
 	@PutMapping("/complete/{id}")
-	public ResponseEntity<Object> completeTask(@PathVariable Long id){
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<Object> completeTask(@PathVariable Long id,
+			HttpServletRequest request){
+		
+		 String token = request.getHeader("Authorization").substring(7);
+		 DecodedJWT jwt = jwtUtils.validateJwt(token);
+		 Long userIdFromToken = jwt.getClaim("id").asLong();
+		
+		 if(userIdFromToken != taskService.getTask(id).getUserId()) {
+			 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unauthorized");
+		 }
+		 
 		taskService.completeTask(id);
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}

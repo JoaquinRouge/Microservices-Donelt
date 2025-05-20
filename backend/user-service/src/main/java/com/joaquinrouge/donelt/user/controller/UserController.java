@@ -13,27 +13,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.joaquinrouge.donelt.user.dto.CreateUserDto;
 import com.joaquinrouge.donelt.user.model.UserModel;
 import com.joaquinrouge.donelt.user.service.IUserService;
+import com.joaquinrouge.donelt.user.utils.JwtUtils;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 	
 	private final IUserService userService;
+	private final JwtUtils jwtUtils;
 	
-	public UserController(IUserService userService) {
+	public UserController(IUserService userService,JwtUtils jwtUtils) {
 		this.userService = userService;
+		this.jwtUtils = jwtUtils;
 	}
 	
 	@GetMapping()
+	@PreAuthorize("isAuthenticated() and hasRole('ADMIN')")
 	public ResponseEntity<Object> getAllUsers(){
 		return ResponseEntity.status(HttpStatus.OK).body(userService.getAllUsers());
 	}
 	
 	@GetMapping("/id/{id}")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated() and hasRole('ADMIN')")
 	public ResponseEntity<Object> getUserById(@PathVariable Long id){
 		try {
 			UserModel user = userService.getUserById(id);
@@ -55,7 +62,18 @@ public class UserController {
 	}
 	
 	@DeleteMapping("/delete/{deleteId}")
-	public ResponseEntity<Object> deleteUser(@PathVariable("deleteId") Long deleteId){
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<Object> deleteUser(@PathVariable("deleteId") Long deleteId,
+			HttpServletRequest request){
+		
+		 String token = request.getHeader("Authorization").substring(7);
+		 DecodedJWT jwt = jwtUtils.validateJwt(token);
+		 Long userIdFromToken = jwt.getClaim("id").asLong();
+		
+		 if(userIdFromToken != deleteId) {
+			 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+		 }
+		 
 		try {
 			userService.deleteUser(deleteId);
 			return ResponseEntity.status(HttpStatus.OK).build();
@@ -65,7 +83,18 @@ public class UserController {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<Object> updateUser(@RequestBody UserModel user){
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<Object> updateUser(@RequestBody UserModel user,
+			HttpServletRequest request ){
+		
+		 String token = request.getHeader("Authorization").substring(7);
+		 DecodedJWT jwt = jwtUtils.validateJwt(token);
+		 Long userIdFromToken = jwt.getClaim("id").asLong();
+		
+		 if(userIdFromToken != user.getId()) {
+			 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+		 }
+		
 		try {
 			UserModel updateUser = userService.updateUser(user);
 			return ResponseEntity.status(HttpStatus.CREATED).body(updateUser);
