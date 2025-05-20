@@ -91,6 +91,11 @@ body::before {
     cursor: pointer;
     transition: background 0.3s, box-shadow 0.3s;
     color: #0d0d0d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 .btn:hover {
@@ -120,4 +125,17 @@ i {
     right: 10px;
     top: 8px;
     color: #78a765;
+}
+
+.oauth-login-container{
+    display: flex;
+    align-items: center;
+}
+
+.svg-oauth{
+    width: 30px;
+}
+
+.oauth{
+    background-color: white;
 }
