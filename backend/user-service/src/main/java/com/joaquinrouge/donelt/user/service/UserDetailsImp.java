@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.joaquinrouge.donelt.user.dto.AuthLoginDto;
 import com.joaquinrouge.donelt.user.dto.AuthResponseDto;
 import com.joaquinrouge.donelt.user.model.UserModel;
@@ -57,7 +58,9 @@ public class UserDetailsImp implements UserDetailsService{
 		
 		String jwt = jwtUtils.generateToken(auth);
 		
-		return new AuthResponseDto(username,"login successful",jwt,true);
+		Long userId = jwtUtils.validateJwt(jwt).getClaim("id").asLong();
+		
+		return new AuthResponseDto(username,userId,"login successful",jwt,true);
 		
 	}
 	

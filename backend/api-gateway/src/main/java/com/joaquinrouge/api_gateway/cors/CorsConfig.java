@@ -8,15 +8,21 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 @Configuration
 public class CorsConfig {
+
     @Bean
     CorsWebFilter corsWebFilter() {
         CorsConfiguration cors = new CorsConfiguration();
-        cors.addAllowedOrigin("http://127.0.0.1:5500"); // Cambiar si hay deploy
+
+        cors.addAllowedOrigin("http://127.0.0.1:5500");
+
         cors.addAllowedMethod("*");
+
         cors.addAllowedHeader("*");
-        cors.setAllowCredentials(true); // solo si uso cookies o auth
+        
+        cors.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
         source.registerCorsConfiguration("/**", cors);
 
         return new CorsWebFilter(source);
