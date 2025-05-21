@@ -1,6 +1,7 @@
 package com.joaquinrouge.donelt.notification.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,12 @@ public class NotificationService implements INotificationService {
 		
 		notiRepo.deleteById(id);
 		
+	}
+
+	@Override
+	public Notification getById(Long id) {
+		return notiRepo.findById(id).orElseThrow(()->
+		new IllegalArgumentException("Notification not found"));
 	}
 
 }
