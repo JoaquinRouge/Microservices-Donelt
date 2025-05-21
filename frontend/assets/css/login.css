@@ -12,21 +12,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: radial-gradient(circle at center, #000, #111);
+    background: #141E30;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     overflow: hidden;
     position: relative;
-}
-
-/* Glow verde en el fondo */
-body::before {
-    content: "";
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, #78a765, transparent 70%);
-    filter: blur(100px);
-    opacity: 0.3;
-    z-index: 0;
 }
 
 /* Contenedor del login con efecto glow */
@@ -34,9 +24,6 @@ body::before {
     background: #1b1b1b;
     padding: 2rem;
     border-radius: 16px;
-    box-shadow:
-        0 0 30px rgba(120, 167, 101, 0.2),
-        0 0 60px rgba(95, 139, 76, 0.25);
     text-align: center;
     color: white;
     width: 350px;
@@ -48,7 +35,7 @@ body::before {
     margin-bottom: 1rem;
     font-size: 1.8rem;
     letter-spacing: 1px;
-    color: #78a765;
+    color: white;
 }
 
 /* Estilo de inputs */
@@ -66,12 +53,8 @@ body::before {
     background: #2b2b2b;
     color: white;
     outline: none;
-    border: 1px solid #5F8B4C;
+    border: 1px solid white;
     transition: 0.3s ease;
-}
-
-.input-group input:focus {
-    box-shadow: 0 0 10px #78a765;
 }
 
 .input-group input::placeholder {
@@ -82,7 +65,7 @@ body::before {
 .btn {
     width: 100%;
     padding: 12px;
-    background: #78a765;
+    background: white;
     border: none;
     border-radius: 8px;
     font-size: 1rem;
@@ -99,8 +82,8 @@ body::before {
 }
 
 .btn:hover {
-    background: #5F8B4C;
-    box-shadow: 0 0 12px #78a765;
+    background: #243B55;
+    color: white;
 }
 
 /* Link de registro */
@@ -110,7 +93,7 @@ body::before {
 }
 
 .register a {
-    color: #78a765;
+    color: white;;
     text-decoration: none;
 }
 
@@ -124,7 +107,7 @@ i {
     position: absolute;
     right: 10px;
     top: 8px;
-    color: #78a765;
+    color:white;
 }
 
 .oauth-login-container{

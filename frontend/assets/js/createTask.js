@@ -1,13 +1,6 @@
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const user = JSON.parse(sessionStorage.getItem("user"));
-
-    if (!user || !user.id) {
-      alert("No user found in sessionStorage");
-      return;
-    }
-
     const task = {
       title: document.getElementById("text").value,
       description: document.getElementById("description").value,
@@ -15,15 +8,16 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
       creationDate: new Date().toISOString().split("T")[0],
       lastNotified:null,
       completed: false,
-      userId: user.id
+      userId: JSON.parse(sessionStorage.getItem("id"))
     };
 
     try {
       const response = await fetch("http://localhost:444/task-service/api/task/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+            method: 'POST',
+          headers: {
+          'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("token")),
+          'Content-Type': 'application/json'
+      },
         body: JSON.stringify(task)
       });
 

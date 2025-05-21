@@ -17,7 +17,9 @@ h1{
 /* Body with dark background like the login image */
 body {
     font-family: 'Montserrat', Arial;
-    background-color: #0d0d0d; /* Dark background */
+    background: #141E30;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -26,18 +28,17 @@ body {
 /* Header remains the same */
 .header {
     height: 100px;
-    background-color: #0d0d0d;
-    color: #5F8B4C;
+    background-color: #141E30;
+    color: rgb(223, 219, 219);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-left: 100px;
     padding-right: 100px;
-    box-shadow: 0 0 20px rgba(95, 139, 76, 0.1); /* Glowing effect with green */
 }
 
 .header i{
-  color: #5F8B4C;
+  color: rgb(223, 219, 219);
 }
 
 i {
@@ -95,7 +96,6 @@ nav {
     border-radius: 10px;
     background-color: #1b1b1b; /* Darker inner background for contrast */
     margin-top: 50px;
-    box-shadow: 0 0 20px rgba(95, 139, 76, 0.4); /* Glowing effect with green */
 }
 
 /* Style buttons within tasks */
@@ -106,18 +106,23 @@ nav {
 .btn {
     width: 100%; /* Full width like the login button */
     height: 50px;
-    background-color: #5F8B4C;
+    background-color: white;
     color: white;
     border: none;
     border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.5s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .btn:hover {
-    background-color: #78a765;
+    background-color: #243B55;
+}
+
+.btn:hover i{
+    transition: 0.5s;
+    color: white;
 }
 
 /* Style task info (description, title, etc.) */
@@ -125,7 +130,7 @@ nav {
     font-weight: 800;
     text-align: center; /* Center the title like "Log In" in the image */
     margin-bottom: 10px;
-    color: #78a765;
+    color: white;
 }
 
 .task-info {

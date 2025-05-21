@@ -1,5 +1,5 @@
-const userId = JSON.parse(sessionStorage.getItem("user")).id;
-const username = JSON.parse(sessionStorage.getItem("user")).username;
+const userId = JSON.parse(sessionStorage.getItem("id"));
+const username = JSON.parse(sessionStorage.getItem("username"));
 const taskSection = document.getElementById("tasks")
 const completedTasksSection = document.getElementById("completed-tasks")
 const title = document.getElementById("title")
@@ -11,7 +11,13 @@ document.getElementById("bell-icon").addEventListener("click", () => {
 });
 
 function getNotifications() {
-    fetch(`http://localhost:444/notification-service/api/notification/user/id/${userId}`)
+  fetch(`http://localhost:444/notification-service/api/notification/user/id/${userId}`, {
+          method: 'GET',
+          headers: {
+          'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("token")),
+          'Content-Type': 'application/json'
+      }
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error("Error obtaining the notifications");
@@ -60,7 +66,13 @@ function getNotifications() {
 
 
 function getTasks() {
-    fetch(`http://localhost:444/task-service/api/task/user/id/${userId}`)
+  fetch(`http://localhost:444/task-service/api/task/user/id/${userId}`, {
+    method: 'GET',
+    headers: {
+          'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("token")),
+          'Content-Type': 'application/json'
+    }
+    })
     .then(response => {
       if (!response.ok) {
         throw new Error("Error obtaining the tasks");
@@ -155,7 +167,11 @@ function getTasks() {
 
 function deleteTask(id) {
   fetch(`http://localhost:444/task-service/api/task/delete/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
+    headers: {
+          'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("token")),
+          'Content-Type': 'application/json'
+    }
   })
     .then(response => {
       if (!response.ok) {
@@ -173,7 +189,11 @@ function deleteTask(id) {
 
 function deleteNotification(id) {
   fetch(`http://localhost:444/notification-service/api/notification/delete/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
+    headers: {
+          'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("token")),
+          'Content-Type': 'application/json'
+    }
   })
     .then(response => {
       if (!response.ok) {
@@ -191,7 +211,11 @@ function deleteNotification(id) {
 
 function completeTask(id) {
   fetch(`http://localhost:444/task-service/api/task/complete/${id}`, {
-    method: "PUT",
+    method: 'PUT',
+    headers: {
+          'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("token")),
+          'Content-Type': 'application/json'
+    }
   })
     .then(response => {
       if (!response.ok) {

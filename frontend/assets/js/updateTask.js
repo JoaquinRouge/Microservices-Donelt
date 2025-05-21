@@ -18,22 +18,24 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
     id: taskId,
     title: document.getElementById("text").value,
     description: document.getElementById("description").value,
-    expirationDate: document.getElementById("expirationDate").value
+    expirationDate: document.getElementById("expirationDate").value,
+    userId: parseInt(sessionStorage.getItem("id"))
   };
 
   fetch("http://localhost:444/task-service/api/task/update", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(updatedTask)
+      method: "PUT",
+      headers: {
+          'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("token")),
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedTask)
   })
     .then(response => {
       if (!response.ok) {
         throw new Error("Error updating the task");
       }
       alert("Task updated successfully!");
-      window.location.href = "donelt.html"; 
+      window.location.href = "/donelt.html"; 
     })
     .catch(error => {
       console.error("Update error:", error.message);

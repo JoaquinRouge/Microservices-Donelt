@@ -1,17 +1,17 @@
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const email = document.getElementById("email").value;
+    const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
     try {
-        const response = await fetch("http://localhost:444/user-service/user/login", {
+        const response = await fetch("http://localhost:444/user-service/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({ 
-                email: email, 
+                username: username, 
                 password: password
             }),
         });
@@ -21,17 +21,20 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
             throw new Error(errorMessage);
         }
 
-        const userData = await response.json();
+        const data = await response.json();
 
-        if (!userData) {
+        if (!data) {
             throw new Error("Respuesta del servidor inválida");
         }
 
-        console.log(userData)
+        console.log(data.jwt)
 
-        sessionStorage.setItem("user", JSON.stringify(userData));
+        sessionStorage.setItem("token", JSON.stringify(data.jwt));
+        sessionStorage.setItem("username", JSON.stringify(data.username));
+        sessionStorage.setItem("id", JSON.stringify(data.id));
 
-         window.location.href ="donelt.html"
+
+        window.location.href ="/donelt.html"
 
     } catch (error) {
         alert(error.message);
