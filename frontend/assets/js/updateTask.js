@@ -5,6 +5,12 @@ const description = decodeURIComponent(params.get("description"));
 const expirationDate = params.get("expirationDate");
 const taskId = params.get("id");
 
+const token = sessionStorage.getItem("token");
+
+if (!token) {
+  window.location.href = "/index.html";
+}
+
 // Rellenar los inputs con los valores actuales
 document.getElementById("text").value = title;
 document.getElementById("description").value = description;

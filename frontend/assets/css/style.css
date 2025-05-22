@@ -49,7 +49,7 @@ i {
 
 nav {
     display: flex;
-    gap: 20px;
+    gap: 35px;
 }
 
 .noti-counter {
@@ -57,7 +57,7 @@ nav {
     width: 20px;
     height: 20px;
     background-color: red;
-    right: 92px;
+    right: 155px;
     top: 25px;
     border-radius: 50%;
     display: flex;

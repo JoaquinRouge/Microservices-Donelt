@@ -3,6 +3,13 @@ const username = JSON.parse(sessionStorage.getItem("username"));
 const taskSection = document.getElementById("tasks")
 const completedTasksSection = document.getElementById("completed-tasks")
 const title = document.getElementById("title")
+const logoutBtn = document.getElementById("logout")
+
+const token = sessionStorage.getItem("token");
+
+if (!token) {
+  window.location.href = "/index.html";
+}
 
 title.innerHTML += " " + username
 
@@ -230,6 +237,11 @@ function completeTask(id) {
       console.error("Error:", error.message);
     });
 }
+
+logoutBtn.addEventListener('click', ()=>{
+  sessionStorage.clear()
+  window.location.href = "/index.html"
+})
 
 getNotifications()
 getTasks()
