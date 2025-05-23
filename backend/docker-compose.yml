@@ -15,13 +15,16 @@ services:
       - "donelt-network"
     depends_on:
       - eureka-server
-  notifcation-server:
+  notification-server:
     build: notification-service
     mem_limit: 999m
     ports:
       - "9001:9001"
     networks:
       - "donelt-network"
+    environment:
+      - JWT_KEY=${JWT_KEY}
+      - JWT_USER=${JWT_USER}
   task-server:
     build: task-service
     mem_limit: 999m
@@ -29,6 +32,9 @@ services:
       - "9000:9000"
     networks:
       - "donelt-network"
+    environment:
+      - JWT_KEY=${JWT_KEY}
+      - JWT_USER=${JWT_USER}
   user-server:
     build: user-service
     mem_limit: 999m
@@ -36,6 +42,8 @@ services:
       - "9002:9002"
     networks:
       - "donelt-network"
-
+    environment:
+      - JWT_KEY=${JWT_KEY}
+      - JWT_USER=${JWT_USER}
 networks:
   donelt-network:

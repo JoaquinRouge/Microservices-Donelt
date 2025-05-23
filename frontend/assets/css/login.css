@@ -109,16 +109,3 @@ i {
     top: 8px;
     color:white;
 }
-
-.oauth-login-container{
-    display: flex;
-    align-items: center;
-}
-
-.svg-oauth{
-    width: 30px;
-}
-
-.oauth{
-    background-color: white;
-}
