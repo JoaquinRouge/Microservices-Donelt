@@ -1,6 +1,8 @@
 # 📋 Donelt – Sistema de Gestión de Tareas
 ![Java](https://img.shields.io/badge/Java-21-blue?logo=java)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.0-brightgreen?logo=springboot)
+![Spring Security](https://img.shields.io/badge/Spring%20Security-3.0-brightgreen?logo=springsecurity)
+![Docker](https://img.shields.io/badge/Docker-19.03%2B-brightblue?logo=docker)
 
 **Donelt** es un software desarrollado con arquitectura de microservicios que permite a los usuarios gestionar sus tareas de manera eficiente. Con esta plataforma podrás crear, editar, eliminar y completar tareas, además de recibir notificaciones automáticas cuando se aproximen las fechas de vencimiento.
 
@@ -17,6 +19,8 @@
 - Java 21
 - Spring Boot
 - Spring Cloud (Eureka, Feign Client)
+- Spring Security
+- JWT
 - Feign Client (Comunicación entre microservicios)
 - Loadbalancer
 - Spring Data JPA + Hibernate
@@ -35,7 +39,9 @@
 - Microservicios separados por responsabilidad
   
 ### ✅ Funcionalidades
-- Registro y login de usuarios
+- Registro y login de usuarios con JSON Web Token
+
+- Securizacion de los endpoints mendiante PreAuthorize
 
 - Crear, editar y eliminar tareas
 
@@ -67,20 +73,32 @@ git clone https://github.com/JoaquinRouge/Microservices-Donelt.git
 
 - Crear una base de datos llamada donelt
 
-- Actualizar las credenciales de conexión en los application.properties de cada microservicio.
+- Actualizar las credenciales de conexión en los application.properties de cada microservicio (Por defecto el usuario es root y no tiene contraseña).
 
-### Iniciar los servicios en orden:
+### Ejecutar con Docker 🐳
+ℹ️ Nota: Subí el archivo .env al repositorio para facilitar la ejecución del proyecto. Sé que esto no es una buena práctica en producción, pero en este caso el objetivo es facilitar la ejecucion del proyecto.
 
-- eureka-server
+✅ Requisitos
+Docker Desktop
 
-- gateway-service
+### 📦 Pasos para levantar el entorno
+Levantar los contenedores:
+En la terminal (carpeta raiz) ejecuta:
 
-- task-service
+ - docker-compose build (crea las imagenes)
+ - docker-compose up (levanta el contenedor)
 
-- notification-service
+Esto creará y levantará automáticamente:
+- Eureka Server
+- API Gateway
+- Task Service
+- Notification Service
+- User service
 
-- frontend (Live Server)
-  
+### Iniciar la interfaz
+
+ - Inicia un Live Server de index.html (carpeta frontend)
+
 ## 📌 Mejoras Futuras
 - Implementar sistema de prioridad para tareas
 
@@ -89,8 +107,6 @@ git clone https://github.com/JoaquinRouge/Microservices-Donelt.git
 - Dashboard de productividad del usuario
 
 - Envío de notificaciones por email
-
-- Agregar JWT para autenticación segura
 
 ## 👨‍💻 Autor
 Joaquín Rougé Núñez
