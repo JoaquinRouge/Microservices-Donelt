@@ -2,6 +2,7 @@ package com.joaquinrouge.donelt.user.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,7 @@ public class AuthController {
 	}
 	
 	@PostMapping("/login")
+	@PreAuthorize("permitAll()")
 	public ResponseEntity<?> login(@RequestBody @Valid AuthLoginDto data){
 		try {
 			return new ResponseEntity<>(userDetails.login(data),HttpStatus.OK);			
